@@ -40,4 +40,29 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        android.util.Log.i("CICLO_VIDA", "MainActivity - onStart: A tela está ficando visível.")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        android.util.Log.i("CICLO_VIDA", "MainActivity - onResume: A tela está pronta para interação (foco).")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        android.util.Log.i("CICLO_VIDA", "MainActivity - onPause: A tela perdeu o foco parcial (ex: abrindo outra tela).")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        android.util.Log.i("CICLO_VIDA", "MainActivity - onStop: A tela não está mais visível.")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        android.util.Log.i("CICLO_VIDA", "MainActivity - onDestroy: A Activity está sendo destruída da memória.")
+    }
 }
