@@ -10,36 +10,50 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
+    // Declaração do botão que será inicializado no onCreate
     private lateinit var buttonAbrir: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge() // Otimiza o layout para usar as bordas da tela (notch/barra de navegação)
         setContentView(R.layout.activity_main)
 
+        // Configuração dos espaçamentos automáticos (Padding) para não cortar o layout nas barras do sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        // Vincula a variável ao componente visual do XML
         buttonAbrir = findViewById(R.id.button_abrir)
+
+        // Configura o ouvinte de clique do botão
         buttonAbrir.setOnClickListener {
 
-            // Criando a Intent de navegação
+            // Criando a Intent de navegação (Origem: this / Destino: DetalhesActivity)
             val intent = Intent(this, DetalhesActivity::class.java).apply {
 
-                // 1. SOLUÇÃO DE MERCADO: Proteção contra clique duplo (Single Top)
+                // SOLUÇÃO DE MERCADO 1: Proteção contra clique duplo (Single Top)
+                // Se o usuário clicar rápido demais, o Android não abre a mesma tela duas vezes
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
-                // 2. SOLUÇÃO DE MERCADO: Passagem de parâmetros chave-valor
+                // SOLUÇÃO DE MERCADO 2: Passagem de parâmetros usando o escopo do apply
+                // Chaves padronizadas em Letras Maiúsculas e SEM ACENTO para evitar bugs de codificação (encoding)
                 putExtra("PRODUTO_SELECIONADO", "Notebook Gamer Pro")
+                putExtra("KEY_FILME_NOME", "The witcher")
+                putExtra("KEY_FILME_CLASSIFICACAO", 5)
+                putExtra("KEY_FILME_AVALIACAO", 9.2)
             }
 
-            // Inicializa a nova tela com os dados acoplados
+            // Inicializa e joga a nova tela na pilha de execução do Android
             startActivity(intent)
         }
     }
+
+    // =========================================================================
+    // MÉTODOS DO CICLO DE VIDA (Para monitoramento no Logcat)
+    // =========================================================================
 
     override fun onStart() {
         super.onStart()
