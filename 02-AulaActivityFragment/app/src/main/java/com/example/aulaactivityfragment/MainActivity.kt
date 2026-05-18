@@ -41,9 +41,20 @@ class MainActivity : AppCompatActivity() {
                 // SOLUÇÃO DE MERCADO 2: Passagem de parâmetros usando o escopo do apply
                 // Chaves padronizadas em Letras Maiúsculas e SEM ACENTO para evitar bugs de codificação (encoding)
                 putExtra("PRODUTO_SELECIONADO", "Notebook Gamer Pro")
-                putExtra("KEY_FILME_NOME", "The witcher")
-                putExtra("KEY_FILME_CLASSIFICACAO", 5)
-                putExtra("KEY_FILME_AVALIACAO", 9.2)
+//                putExtra("KEY_FILME_NOME", "The witcher")
+//                putExtra("KEY_FILME_CLASSIFICACAO", 5)
+//                putExtra("KEY_FILME_AVALIACAO", 9.2)
+
+                val filme = Filme(
+                    "Sem limites",
+                    "teste",
+                    4.8,
+                    "sivaldo",
+                    "Netiflix",
+
+                )
+
+                putExtra("filme", filme)
             }
 
             // Inicializa e joga a nova tela na pilha de execução do Android

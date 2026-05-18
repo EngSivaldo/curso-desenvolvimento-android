@@ -1,5 +1,6 @@
 package com.example.aulaactivityfragment
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -40,15 +41,22 @@ class DetalhesActivity : AppCompatActivity() {
         // Programação Defensiva: Só tenta ler se o pacote de dados não for nulo
         if (bundle != null) {
             // Buscando os dados usando as chaves corrigidas e sem acentos
-            val filme = bundle.getString("KEY_FILME_NOME")
-            val classificacao = bundle.getInt("KEY_FILME_CLASSIFICACAO")
-            val avaliacoes = bundle.getDouble("KEY_FILME_AVALIACAO")
+//            val filme = bundle.getString("KEY_FILME_NOME")
+//            val classificacao = bundle.getInt("KEY_FILME_CLASSIFICACAO")
+//            val avaliacoes = bundle.getDouble("KEY_FILME_AVALIACAO")
 
             // Monta a string formatada usando String Templates do Kotlin
-            val resultado = "Filme: $filme\nClassificação: $classificacao\nAvaliação: $avaliacoes"
+            //val resultado = "Filme: $filme\nClassificação: $classificacao\nAvaliação: $avaliacoes"
+
+            val filme = if ( Build.VERSION.SDK_INT >= 33){
+                bundle.getSerializable("filme", Filme::class.java)
+            }else{
+                bundle.getSerializable("filme") as Filme
+            }
+
 
             // Exibe o resultado estruturado no TextView correspondente
-            textFilme.text = resultado
+            textFilme.text = "${filme?.nome} - ${filme?.distribuidor}"
         }
 
         // =========================================================================
