@@ -1,1 +1,5 @@
-02-AulaActivityFragment/.idea/
+.idea/
+**/.idea/
+*.iml
+build/
+**/build/02-AulaActivityFragment/.idea/
