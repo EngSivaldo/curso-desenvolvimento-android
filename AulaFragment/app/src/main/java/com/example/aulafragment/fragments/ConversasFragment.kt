@@ -6,10 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.aulafragment.R
 
 class ConversasFragment : Fragment() {
+
+    private lateinit var btnExecutar: Button
+    private lateinit var textNome: TextView
+    private lateinit var editNome: EditText
+
 
     // 1. O Fragment é associado à Activity hospedeira
     override fun onAttach(context: Context) {
@@ -36,6 +44,16 @@ class ConversasFragment : Fragment() {
             container,
             false
         )
+        //recuperar os componentes da interface
+        btnExecutar = view.findViewById(R.id.btnExecutar)
+        editNome = view.findViewById(R.id.editNome)
+        textNome = view.findViewById(R.id.textNome)
+
+
+        btnExecutar.setOnClickListener {
+            textNome.text = editNome.text.toString()
+        }
+
         return view
     }
 
